@@ -1,21 +1,34 @@
 <!--How many hours have you lived game-->
 <script type="text/javascript">
-	(function() {
+  (function() {
     var age, hours, answer;
-  	age = prompt("How old are you?");
-  	hours = prompt("If you are " + age + " then how many hours have you lived?");
-  	answer = age * 365 * 24;
 
-  	while (hours != answer) {//Should keep prompting while there's no match
+    var Guess = function() {
+      this.number = 0;
+      this.total = 10;
+      this.guessesRemaining = function () {
+        return (this.total - this.number);
+      }
+    }
+
+    var guess = new Guess();
+
+    age = prompt("How old are you?");
+    hours = prompt("If you are " + age + " then how many hours have you lived? You have a total of " + guess.total + " chances to correctly guess how many hours you've lived.");
+    answer = age * 365 * 24;
+
+    while (hours != answer) {//Should keep prompting while there's no match
+      guess.number++;
       if (hours < answer) { //guess is lower than answer
-        hours = prompt("Your guess is too low, you should live longer. Guess again.");
+        hours = prompt("Your guess is too low, you should live longer. You have " + guess.guessesRemaining() + " guesses remaining.");
       } else if (hours > answer) {// guess is higher than the answer
-        hours = prompt("You haven't lived that long yet. Guess again.");
+        hours = prompt("You haven't lived that long yet. You have " + guess.guessesRemaining() + " guesses remaining.");
       }
     }
     //When hours = answer
-  	alert("That's correct you've been alive for " + answer + " hours");
+    alert("That's correct you've been alive for " + answer + " hours");
   })();
 </script>
 
-<!--Nate P. helped me with this assignment, Michael Tse 2nd-assignment  -->
+<!--Nate P. helped me with this assignment, Michael Tse 2nd-assignment, Gino Bona third assignment  -->
+
