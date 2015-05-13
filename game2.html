@@ -14,7 +14,7 @@
     var guess = new Guess();
 
     age = prompt("How old are you?");
-    hours = prompt("If you are " + age + " then how many hours have you lived? You have a total of " + guess.total + " chances to correctly guess how many hours you've lived.");
+    hours = prompt("If you are " + age + " then how many hours have you lived? You have a total of " + Guess.total + " chances to correctly guess how many hours you've lived.");
     answer = age * 365 * 24;
 
     while (hours != answer) {//Should keep prompting while there's no match
