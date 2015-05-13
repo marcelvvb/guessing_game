@@ -4,3 +4,4 @@ Updated to have the user keep guessing the hours until correct using a while loo
 
 Updated to put entire code in IFFE and cleaned up further.
 
+Added object constructor to fulfill Assingment #3 in lab.
