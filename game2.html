@@ -1,47 +1,67 @@
-<!--How many hours have you lived game-->
-<script type="text/javascript">
-  (function() {
-    var age, hours, answer;
+<!doctype html>
+<html>
+  <head>
+    <title>Guess your age</title>
+  </head>
+  <body>
+    <header>
+    <h1>Guess your age in hours!</h1>
+    <h2>How it works:</h2>
+    </header>
+    <main>
+    <ol>
+      <li>The game will ask you how old you are on the first prompt simply enter your age.</li>
+      <li>After you enter your age you will have 20 chances to correctly guess how many hours you've lived.</li>
+      <li>If your guess is too low the game will inform "Your guess is too low, you should live longer."</li>
+      <li>If your guess is too high the game will inform you "You haven't lived that long yet."</li>
+      <li>If you guess more than 20 times you lose!</li>
+      <li>Once you enter your age correctly in hours you've won!</li>
+    </ol>
+      <p><a href="#bottom">Click here for examples</a></p>
+    <img src="images/time.jpeg" alt="clock ticking" />
+    </main>
+    <footer>
+    <p id="bottom"><strong>Examples:</strong>
+      <ul>
+        <li><a href="images/age.png">Entering your age</a></li>
+        <li><a href="images/toolow.png">Guessing too low</a></li>
+        <li><a href="images/toohigh.png">Guessing too high</a></li>
+        <li>If you have any questions feel free to send me an <a href="mailto:marcelvvb@gmail.com"> e-mail.</a></li>
+      </ul>
+    </p>
+    </footer>
+    <script type="text/javascript">
+      window.onload = function() {
+        var age, hours, answer;
+        var Guess = function() {
+          this.number = 0;
+          this.total = 10;
+        }
+        var guess = new Guess();
+        age = prompt("How old are you?");
+        hours = prompt("If you are " + age + " then how many hours have you lived? You have a total of " + guess.total + " chances to correctly guess how many hours you've lived.");
+        answer = age * 365 * 24;
 
-    var Chances = function() {
-      this.used = 0;
-      this.total = 20;
-      this.remaining = function () {
-        return (this.total - this.used);
+        while (hours != answer) {
+          guess.number++;
+          guess.total--;
+          if (guess.total == 0) {
+            break;
+          } else if (hours < answer) {
+            hours = prompt("Your guess is too low, you should live longer. You have " + guess.total + " guesses remaining.");
+          } else if (hours > answer) {
+            hours = prompt("You haven't lived that long yet. You have " + guess.total + " guesses remaining.");
+          }
+        }
+
+        if (guess.total == 0) {
+          alert('You lose!');
+        } else {
+          alert("That's correct you've been alive for " + answer + " hours.");
+        }
       }
-    }
-
-    var Player = function() {
-      this.initialize = function() {
-        this.chances = new Chances();
-        this.age = prompt("How old are you?");
-        this.getGuess("If you are " + this.age + " then how many hours have you lived? You have a total of " + this.chances.total + " chances to correctly guess how many hours you've lived.");
-        this.hoursLived = this.age * 365 * 24;
-      }
-      this.getGuess = function(message) {
-        this.guess = prompt(message);
-      }
-      this.wins = function() {
-        alert("That's correct you've lived for " + this.hoursLived + " hours." );
-      }
-    }
-
-    var user = new Player();
-    user.initialize();
-
-    while (user.guess != user.hoursLived) {//Should keep prompting while there's no match
-      user.chances.used++;
-      if (user.guess < user.hoursLived) { //guess is lower than answer
-        user.getGuess("Your guess is too low, you should live longer. You have " + user.chances.remaining() + " guesses remaining.");
-      } else if (user.guess > user.hoursLived) { // guess is higher than the answer
-        user.getGuess("You haven't lived that long yet. You have " + user.chances.remaining() + " guesses remaining.");
-      }
-    }
-    //When hours = answer
-    user.wins();
-
-  })();
-</script>
-
+    </script>
+  </body>
+</html>
 <!--Nate P. helped me with this assignment, Michael Tse 2nd-assignment, Gino Bona third assignment  -->
 
