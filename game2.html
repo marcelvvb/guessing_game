@@ -3,30 +3,43 @@
   (function() {
     var age, hours, answer;
 
-    var Guess = function() {
-      this.number = 0;
-      this.total = 10;
-      this.guessesRemaining = function () {
-        return (this.total - this.number);
+    var Chances = function() {
+      this.used = 0;
+      this.total = 20;
+      this.remaining = function () {
+        return (this.total - this.used);
       }
     }
 
-    var guess = new Guess();
+    var Player = function() {
+      this.initialize = function() {
+        this.chances = new Chances();
+        this.age = prompt("How old are you?");
+        this.getGuess("If you are " + this.age + " then how many hours have you lived? You have a total of " + this.chances.total + " chances to correctly guess how many hours you've lived.");
+        this.hoursLived = this.age * 365 * 24;
+      }
+      this.getGuess = function(message) {
+        this.guess = prompt(message);
+      }
+      this.wins = function() {
+        alert("That's correct you've lived for " + this.hoursLived + " hours." );
+      }
+    }
 
-    age = prompt("How old are you?");
-    hours = prompt("If you are " + age + " then how many hours have you lived? You have a total of " + guess.total + " chances to correctly guess how many hours you've lived.");
-    answer = age * 365 * 24;
+    var user = new Player();
+    user.initialize();
 
-    while (hours != answer) {//Should keep prompting while there's no match
-      guess.number++;
-      if (hours < answer) { //guess is lower than answer
-        hours = prompt("Your guess is too low, you should live longer. You have " + guess.guessesRemaining() + " guesses remaining.");
-      } else if (hours > answer) {// guess is higher than the answer
-        hours = prompt("You haven't lived that long yet. You have " + guess.guessesRemaining() + " guesses remaining.");
+    while (user.guess != user.hoursLived) {//Should keep prompting while there's no match
+      user.chances.used++;
+      if (user.guess < user.hoursLived) { //guess is lower than answer
+        user.getGuess("Your guess is too low, you should live longer. You have " + user.chances.remaining() + " guesses remaining.");
+      } else if (user.guess > user.hoursLived) { // guess is higher than the answer
+        user.getGuess("You haven't lived that long yet. You have " + user.chances.remaining() + " guesses remaining.");
       }
     }
     //When hours = answer
-    alert("That's correct you've been alive for " + answer + " hours");
+    user.wins();
+
   })();
 </script>
 
