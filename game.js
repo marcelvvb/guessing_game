@@ -27,5 +27,4 @@
         } else {
           alert("That's correct you've been alive for " + answer + " hours.");
         }
-      }
-
+        }
