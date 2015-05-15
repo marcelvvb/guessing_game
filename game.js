@@ -2,6 +2,7 @@
         window.onload = function() {
         var age, hours, answer;
         var Guess = function() {
+          //this.ending = "";//
           this.number = 0;
           this.total = 20;
         }
@@ -23,8 +24,11 @@
         }
 
         if (guess.total == 0) {
-          alert('You lose!');
+          finalMessage = ('You lose!');
         } else {
-          alert("That's correct you've been alive for " + answer + " hours.");
+          finalMessage = ("That's correct! You've been alive for " + answer + " hours.");
         }
+        var endingTwo = document.getElementById('results')
+
+        endingTwo.textContent = finalMessage
         }
